@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.example.prestamo.adapters.AdapPrestamos;
 import com.example.prestamo.SQLite.DbPrestamos;
-import com.example.prestamo.pojo_datos.PrestamoConCliente;
+import com.example.prestamo.pojo_datos.Prestamo_Cliente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ListPrestamosActivity extends AppCompatActivity {
     private String indice;
     private AdapPrestamos adapPrestamo;
-    private List<PrestamoConCliente> prestamosList = new ArrayList<>();
+    private List<Prestamo_Cliente> prestamosList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,12 +17,12 @@ import android.widget.Toast;
 import com.example.prestamo.adapters.AdapPago;
 import com.example.prestamo.SQLite.DbPrestamos;
 import com.example.prestamo.objeto_clientes_datos.Pago;
-import com.example.prestamo.pojo_datos.PrestamoConClienteConPagos;
+import com.example.prestamo.pojo_datos.Prestamo_Cliente_Pagos;
 
 
 public class VerPrestamosActivity extends AppCompatActivity {
     private int id=0;
-    private PrestamoConClienteConPagos prestamoConClienteConPagos=new PrestamoConClienteConPagos();
+    private Prestamo_Cliente_Pagos prestamoClientePagos =new Prestamo_Cliente_Pagos();
     private AdapPago adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,9 @@ public class VerPrestamosActivity extends AppCompatActivity {
         ListView lvPagos = findViewById(R.id.lvPagos);
         if(extras!=null){
             id=extras.getInt("id");
-            prestamoConClienteConPagos=DbPrestamos.getAppDatabase(this).prestamosDao().MostrarPojoTodo(id);
+            prestamoClientePagos =DbPrestamos.getAppDatabase(this).prestamosDao().MostrarPojoTodo(id);
             llenarPrestamo();
-            adapter= new AdapPago(this, R.layout.item_pago, prestamoConClienteConPagos.getPagoList());
+            adapter= new AdapPago(this, R.layout.item_pago, prestamoClientePagos.getPagoList());
             lvPagos.setAdapter(adapter);
 
         }
@@ -51,22 +51,22 @@ public class VerPrestamosActivity extends AppCompatActivity {
         TextView tvMontoPagar= findViewById(R.id.tvMontoPagar);
         TextView tvMontoCuota= findViewById(R.id.tvMontoPagado);
 
-        if(prestamoConClienteConPagos.getPagoList().size()==0)
+        if(prestamoClientePagos.getPagoList().size()==0)
             tvMontoCuota.setText("0.00");
         else{
             float total=0;
-            for (int i=0; i<prestamoConClienteConPagos.getPagoList().size(); i++){
-                total+=prestamoConClienteConPagos.getPagoList().get(i).getMonto();
+            for (int i = 0; i< prestamoClientePagos.getPagoList().size(); i++){
+                total+= prestamoClientePagos.getPagoList().get(i).getMonto();
             }
             tvMontoCuota.setText(String.valueOf(total));
         }
-        tvMontoPagar.setText(prestamoConClienteConPagos.getPrestamos().getMontoPagar().toString());
-        tvFechaFinal.setText(prestamoConClienteConPagos.getPrestamos().getFechaFinal());
-        tvFecha.setText(prestamoConClienteConPagos.getPrestamos().getFechaInicio());
-        tvPlazo.setText(String.valueOf(prestamoConClienteConPagos.getPrestamos().getPlazo()));
-        tvInteres.setText(prestamoConClienteConPagos.getPrestamos().getInteres());
-        tvMontoCredito.setText(prestamoConClienteConPagos.getPrestamos().getMonto().toString());
-        tvNombreCliente.setText(prestamoConClienteConPagos.getCliente().getNombre() + " "+ prestamoConClienteConPagos.getCliente().getApelldio());
+        tvMontoPagar.setText(prestamoClientePagos.getPrestamos().getMontoPagar().toString());
+        tvFechaFinal.setText(prestamoClientePagos.getPrestamos().getFechaFinal());
+        tvFecha.setText(prestamoClientePagos.getPrestamos().getFechaInicio());
+        tvPlazo.setText(String.valueOf(prestamoClientePagos.getPrestamos().getPlazo()));
+        tvInteres.setText(prestamoClientePagos.getPrestamos().getInteres());
+        tvMontoCredito.setText(prestamoClientePagos.getPrestamos().getMonto().toString());
+        tvNombreCliente.setText(prestamoClientePagos.getCliente().getNombre() + " "+ prestamoClientePagos.getCliente().getApelldio());
     }
 
     @Override
@@ -99,10 +99,10 @@ public class VerPrestamosActivity extends AppCompatActivity {
                         }else{
                             pago.setMonto(Float.parseFloat(etCantidad.getText().toString()));
                         }
-                        pago.setIdPrestamo(prestamoConClienteConPagos.getPrestamos().getId());
+                        pago.setIdPrestamo(prestamoClientePagos.getPrestamos().getId());
                         try {
                             DbPrestamos.getAppDatabase(VerPrestamosActivity.this).pagoDao().Insertar(pago);
-                            prestamoConClienteConPagos.getPagoList().add(pago);
+                            prestamoClientePagos.getPagoList().add(pago);
                             adapter.notifyDataSetChanged();
                             calcularPago();
                         }catch (SQLiteConstraintException e){
@@ -122,12 +122,12 @@ public class VerPrestamosActivity extends AppCompatActivity {
 
     public void calcularPago(){
         TextView tvMontoCuota = findViewById(R.id.tvMontoPagado);
-        if(prestamoConClienteConPagos.getPagoList().size()==0)
+        if(prestamoClientePagos.getPagoList().size()==0)
             tvMontoCuota.setText("0.00");
         else{
             float total=0;
-            for (int i=0; i<prestamoConClienteConPagos.getPagoList().size(); i++){
-                total+=prestamoConClienteConPagos.getPagoList().get(i).getMonto();
+            for (int i = 0; i< prestamoClientePagos.getPagoList().size(); i++){
+                total+= prestamoClientePagos.getPagoList().get(i).getMonto();
             }
             tvMontoCuota.setText(String.valueOf(total));
         }
@@ -136,12 +136,12 @@ public class VerPrestamosActivity extends AppCompatActivity {
     public float calcular(){
         TextView tvMontoCuota = findViewById(R.id.tvMontoPagado);
         float total=0;
-        if(prestamoConClienteConPagos.getPagoList().size()==0) {
+        if(prestamoClientePagos.getPagoList().size()==0) {
             tvMontoCuota.setText("0.00");
         }
         else{
-            for (int i=0; i<prestamoConClienteConPagos.getPagoList().size(); i++){
-                total+=prestamoConClienteConPagos.getPagoList().get(i).getMonto();
+            for (int i = 0; i< prestamoClientePagos.getPagoList().size(); i++){
+                total+= prestamoClientePagos.getPagoList().get(i).getMonto();
             }
 
         }

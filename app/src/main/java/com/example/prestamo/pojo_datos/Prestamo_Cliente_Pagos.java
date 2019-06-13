@@ -10,7 +10,7 @@ import com.example.prestamo.objeto_clientes_datos.Prestamos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrestamoConClienteConPagos {
+public class Prestamo_Cliente_Pagos {
     @Embedded
     Prestamos prestamos;
 
@@ -20,7 +20,7 @@ public class PrestamoConClienteConPagos {
     @Relation(entity = Pago.class, parentColumn = "id", entityColumn = "idPrestamo")
     List<Pago> pagoList;
 
-    public PrestamoConClienteConPagos() {
+    public Prestamo_Cliente_Pagos() {
         prestamos = new Prestamos();
         cliente = new Cliente();
         pagoList= new ArrayList<>();

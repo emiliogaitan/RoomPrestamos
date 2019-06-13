@@ -5,8 +5,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import com.example.prestamo.objeto_clientes_datos.Prestamos;
-import com.example.prestamo.pojo_datos.PrestamoConCliente;
-import com.example.prestamo.pojo_datos.PrestamoConClienteConPagos;
+import com.example.prestamo.pojo_datos.Prestamo_Cliente;
+import com.example.prestamo.pojo_datos.Prestamo_Cliente_Pagos;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public interface PrestamosDao {
     void Insertar(Prestamos prestamos);
 
     @Query("select * from prestamos inner join cliente on cliente.cedula = prestamos.cedulaCliente")
-    List<PrestamoConCliente> MostrarPojo();
+    List<Prestamo_Cliente> MostrarPojo();
 
     @Query("select * from prestamos inner join cliente on cliente.cedula = prestamos.cedulaCliente where cedulaCliente=:cedula")
-    List<PrestamoConCliente> MostrarPojoCedula(String cedula);
+    List<Prestamo_Cliente> MostrarPojoCedula(String cedula);
 
     @Query("select * from cliente inner join prestamos on cliente.cedula = prestamos.cedulaCliente where prestamos.id=:id")
-    PrestamoConClienteConPagos MostrarPojoTodo(int id);
+    Prestamo_Cliente_Pagos MostrarPojoTodo(int id);
 }

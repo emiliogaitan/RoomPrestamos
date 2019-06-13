@@ -10,16 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.prestamo.R;
-import com.example.prestamo.pojo_datos.PrestamoConCliente;
+import com.example.prestamo.pojo_datos.Prestamo_Cliente;
 
 import java.util.List;
 
 public class AdapPrestamos extends ArrayAdapter {
     private Context context;
     private int resource;
-    private List<PrestamoConCliente> prestamosList;
+    private List<Prestamo_Cliente> prestamosList;
 
-    public AdapPrestamos(@NonNull Context context, int resource, @NonNull List<PrestamoConCliente> prestamosList) {
+    public AdapPrestamos(@NonNull Context context, int resource, @NonNull List<Prestamo_Cliente> prestamosList) {
         super(context, resource, prestamosList);
         this.context = context;
         this.resource = resource;

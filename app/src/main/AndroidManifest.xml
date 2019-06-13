@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Acerca"></activity>
+        <activity android:name=".Principal"></activity>
+        <activity android:name=".Acerca" />
         <activity android:name=".ListClienteActivity" />
         <activity android:name=".ListPrestamosActivity" />
         <activity android:name=".VerPrestamosActivity" />

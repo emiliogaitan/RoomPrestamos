@@ -5,14 +5,14 @@ import android.arch.persistence.room.Embedded;
 import com.example.prestamo.objeto_clientes_datos.Cliente;
 import com.example.prestamo.objeto_clientes_datos.Prestamos;
 
-public class PrestamoConCliente {
+public class Prestamo_Cliente {
     @Embedded
     Cliente cliente;
 
     @Embedded
     Prestamos prestamos;
 
-    public PrestamoConCliente(){
+    public Prestamo_Cliente(){
         cliente=new Cliente();
         prestamos=new Prestamos();
     }

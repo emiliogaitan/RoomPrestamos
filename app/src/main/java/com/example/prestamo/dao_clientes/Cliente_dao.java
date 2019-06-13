@@ -11,7 +11,7 @@ import com.example.prestamo.objeto_clientes_datos.Cliente;
 import java.util.List;
 
 @Dao
-public interface ClienteDao {
+public interface Cliente_dao {
     @Insert
     void Insertar(Cliente cliente);
 
